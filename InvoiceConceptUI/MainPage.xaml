@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InvoiceConceptUI.MainPage"  
+             xmlns:signaturePad="clr-namespace:Syncfusion.Maui.SignaturePad;assembly=Syncfusion.Maui.SignaturePad"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             BackgroundColor="{AppThemeBinding Light=#efefef,Dark=Black}">
+    <!-- Main layout-->
+     <Grid RowDefinitions="*">
+            <!-- Allows to top information be scrolled-->
+            <ScrollView Grid.Row="0" Margin="15,10">
+            <!--Layout top information--> 
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+                <!-- Business info-->
+                 <Frame Grid.Row="0">
+                    <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,Auto,*">
+                        <!-- Business description-->
+                        <!-- Title-->
+                        <Label Grid.Column="0" Grid.Row="0" Text="BUSINESS INFO" TextColor="#a0a0a0"/>
+                        <!-- Identification-->
+                        <Label Grid.Column="0" Grid.Row="1" Text="NO. 102597" FontAttributes="Bold" Padding="0,0,0,11"/>
+                         <!-- Name-->
+                        <Label Grid.Column="0" Grid.Row="2" Text="7 Design Studio"  FontAttributes="Bold"/>
+                         <!-- Email-->
+                        <Label Grid.Column="0" Grid.Row="3" Text="7luyuhang@gmail.com" TextColor="#a0a0a0"/>
+                        <!-- Separator-->
+                        <BoxView Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" WidthRequest="1"/>
+
+                        <!--Signature -->
+                        <!-- Title-->
+                        <Label Grid.Column="2" Grid.Row="0" Text="Signature" TextColor="#a0a0a0" VerticalTextAlignment="End"/>
+                        <!--Syncfusion Signature Pad -->
+                        <signaturePad:SfSignaturePad Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" MinimumStrokeThickness="1" MaximumStrokeThickness="4" StrokeColor="{AppThemeBinding Light=Black, Dark=White}" />
+
+                        <!-- Paid badge-->
+                        <Label Grid.Column="2" Grid.RowSpan="4" BackgroundColor="#46aa62" Text="PAID" TextColor="White" Padding="0,50,20,0" Rotation="40" VerticalOptions="Start" FontSize="11" HorizontalTextAlignment="End" TranslationX="60" TranslationY="-80"/>
+                    </Grid> 
+                 </Frame>
+                <!-- Clients-->
+                 <Frame Grid.Row="1">
+                    <Grid RowDefinitions="*,*,*" RowSpacing="10" ColumnDefinitions="Auto,*,Auto">
+                        <!-- Title-->
+                        <Label Grid.Column="0" Grid.Row="0" Text="CLIENTS" TextColor="#a0a0a0"/>
+                        <!-- Logo-->
+                        <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" 
+                                Margin="0,0,20,0"
+                                Stroke="Transparent"
+                                BackgroundColor="{AppThemeBinding Light=Black, Dark=White}"
+                                StrokeThickness="4"  
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                StrokeShape="RoundRectangle 7">
+                                <Image Aspect="AspectFill" Source="{AppThemeBinding Dark=niken, Light=nike}" />
+                         </Border>
+                        <!-- Name-->
+                        <Label Grid.Column="1" Grid.Row="1" Text="Nike Product" FontAttributes="Bold"/>
+                        <!-- Email-->
+                        <Label Grid.Column="1" Grid.Row="2" Text="develop-project@gmail.com" TextColor="#a0a0a0"/>
+                        <!-- Icon-->
+                        <Image Grid.Column="2" Grid.Row="0" Source="points"/>
+                        <!-- Edit Label-->
+                        <Label Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" TextColor="#3373dc" VerticalTextAlignment="Center" Text="Edit"/>
+                    </Grid>
+                 </Frame>
+                     <!-- Items-->
+                     <Frame Grid.Row="2">
+                        <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="5">
+                        <!--Item and prices title-->
+                        <Label Grid.Row="0" Grid.Column="0" Text="ITEMS" HorizontalTextAlignment="Start" TextColor="#9a9a9a"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="PRICE" HorizontalTextAlignment="End" TextColor="#9a9a9a"/>
+                        <!-- Item List: Syncfusion ListView Control-->
+                        <syncfusion:SfListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                                ItemsSource="{Binding ItemInfo}" 
+                                                ItemSize="80"
+                                                ScrollBarVisibility="Never"
+                                                HeightRequest="140"
+                                                HorizontalOptions="FillAndExpand" 
+                                                Orientation="Vertical">
+                            <syncfusion:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,Auto,*">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Order}" Padding="5" BackgroundColor="{AppThemeBinding Dark=#141414, Light=#efefef}" Margin="0,0,10,0"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" TextColor="#a3a3a3"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="{Binding Price}" FontSize="18" HorizontalOptions="End" VerticalTextAlignment="Center"/>
+                                        <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="0.5"/>
+                                    </Grid> 
+                                </DataTemplate>
+                            </syncfusion:SfListView.ItemTemplate>
+                        </syncfusion:SfListView>
+                        <!-- Separator-->
+                        <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="0.5"/>
+                        <!-- Middle Button-->
+                        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Add Item" CornerRadius="15" WidthRequest="130" HeightRequest="35" BackgroundColor="#3775dc" HorizontalOptions="Center" TextColor="White" Margin="0,10"/>
+                        <!-- Cutouts in circles -->
+                        <Ellipse Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" Margin="-30,-30,0,0" Fill="{AppThemeBinding Light=#efefef,Dark=Black}" VerticalOptions="End" HeightRequest="26" WidthRequest="26" StrokeThickness="0"/>
+                        <Ellipse Grid.Row="2" Grid.Column="1" HorizontalOptions="End"  Margin="0,-30,-30,0" Fill="{AppThemeBinding Light=#efefef,Dark=Black}" VerticalOptions="End" HeightRequest="26" WidthRequest="26" StrokeThickness="0"/>
+
+                        <!--Total information-->
+
+                        <!-- Subtotal information-->
+                        <Label Grid.Row="3" Grid.Column="0" Text="Subtotal" TextColor="{AppThemeBinding Light=Black, Dark=#727272}"/>
+                        <Label Grid.Row="3" Grid.Column="1" Text="$1,171.19" TextColor="{AppThemeBinding Light=Black, Dark=#727272}" HorizontalTextAlignment="End"/>
+                        <!-- Discount-->
+                        <Label Grid.Row="4" Grid.Column="0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Discount" TextColor="{AppThemeBinding Light=Black, Dark=#727272}"  />
+                                    <Span Text=" -37%" TextColor="#727272"/>
+                                </FormattedString> 
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Grid.Row="4" Grid.Column="1" Text="-351.35" TextColor="{AppThemeBinding Light=Black, Dark=#727272}" HorizontalTextAlignment="End"/>
+                        <!-- Tax-->
+                        <Label Grid.Row="5" Grid.Column="0" Text="Tax" TextColor="{AppThemeBinding Light=Black, Dark=#727272}"/>
+                        <Label Grid.Row="5" Grid.Column="1" Text="+117.11" TextColor="{AppThemeBinding Light=Black, Dark=#727272}" HorizontalTextAlignment="End"/>
+                        <!-- Separator-->
+                        <BoxView Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"  HeightRequest="0.5"/>
+                        <!-- Total-->
+                        <Label Grid.Row="7" Grid.Column="0" Text="Total" TextColor="{AppThemeBinding Light=Black, Dark=#727272}"/>
+                        <Label Grid.Row="7" Grid.Column="1" Text="$936.65" TextColor="{AppThemeBinding Light=Black, Dark=#727272}" FontSize="18" HorizontalTextAlignment="End"/>
+
+                    </Grid>
+                  </Frame> 
+                </Grid>
+             </ScrollView>
+
+           <!-- Button Bar-->
+           <Grid Grid.Row="0" RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto,Auto" HeightRequest="100" Margin="0,0,0,-30" Padding="25,10" VerticalOptions="End" BackgroundColor="{AppThemeBinding Light=White, Dark=#181818}">
+                 <!--Invoice number-->
+                <Label Grid.Row="0" Grid.Column="0" Text="INV-791078" TextColor="{AppThemeBinding Dark=White, Light=Black}" FontAttributes="Bold"/>
+                 <!--Period of days-->
+                <Label Grid.Row="1" Grid.Column="0" Text="Due in 7 Days " TextColor="#9d9d9d"/>
+                 <!--Call to action Buttons-->
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="{AppThemeBinding Dark=#313131, Light=White}" CornerRadius="18" WidthRequest="60" HeightRequest="35" ImageSource="{AppThemeBinding Light=glasses, Dark=glassesn}" BorderWidth="2" BorderColor="{AppThemeBinding Light=#ededed ,Dark=Transparent}" Margin="0,0,15,0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" BackgroundColor="{AppThemeBinding Dark=White, Light=Black}" CornerRadius="18" WidthRequest="60" HeightRequest="35" ImageSource="{AppThemeBinding Light=telegram, Dark=telegramn}"/>
+            </Grid> 
+        </Grid>
+
+</ContentPage>
+
